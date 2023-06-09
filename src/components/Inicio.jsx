@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 import React from "react"; //necesaria en stackblitz
 function Inicio() {
   return (
@@ -13,9 +13,9 @@ function Inicio() {
         Frontend: Single Page Application, HTML, CSS, Bootstrap, NodeJs,
         Javascript y React.
       </p>
-      <Link to="/albumes" className="btn btn-lg btn-primary">
-        <i className="fa fa-search"> </i> Ver Albumes CRUD
-      </Link>
+      {/*   {<Link to="/albumes" className="btn btn-lg btn-primary">
+        <i className="fa fa-search"> </i> 
+      </Link>} */}
     </div>
   );
 }

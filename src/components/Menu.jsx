@@ -26,11 +26,6 @@ function Menu() {
               Inicio
             </NavLink>
           </li>
-          <li className="nav-item">
-            <NavLink className="nav-link" to="/albumes">
-              Albumes
-            </NavLink>
-          </li>
         </ul>
       </div>
     </nav>
