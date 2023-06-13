@@ -1,25 +1,23 @@
-import logo from './logo.svg';
+import React from 'react';
+import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
+import Inicio from './components/Inicio.jsx';
+import Menu from './components/menu.jsx';
+import Autos from './components/autos/Autos.jsx';
 import './App.css';
 
-function App() {
+export default function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <BrowserRouter>
+        <Menu />
+        <div className="divBody">
+          <Routes>
+            <Route path="/inicio" element={<Inicio />} />
+            <Route path="/autos" element={<Autos />} />
+            <Route path="*" element={<Navigate to="/Inicio" replace />} />
+          </Routes>
+        </div>
+      </BrowserRouter>
+    </>
   );
 }
-
-export default App;
