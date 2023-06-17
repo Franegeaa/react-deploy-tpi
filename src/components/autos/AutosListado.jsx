@@ -16,8 +16,8 @@ export default function AutosListado({
             <th className="text-center">Nombre</th>
             <th className="text-center">Marca</th>
             <th className="text-center">Modelo</th>
-            <th className="text-center">Puertas</th>
-            <th className="text-center">Fecha</th>
+            <th className="text-center">Cantidad de Puertas</th>
+            <th className="text-center">Fecha de Compra</th>
             <th className="text-center text-nowrap">Acciones</th>
           </tr>
         </thead>

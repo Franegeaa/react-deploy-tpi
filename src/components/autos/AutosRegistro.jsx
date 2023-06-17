@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useForm } from "react-hook-form";
 
 export default function AutosRegistro({
@@ -36,8 +36,8 @@ export default function AutosRegistro({
                 {...register("nombre", {
                   required: { value: true, message: "Nombre es requerido" },
                   minLength: {
-                    value: 4,
-                    message: "Nombre debe tener al menos 4 caracteres",
+                    value: 2,
+                    message: "Nombre debe tener al menos 2 caracteres",
                   },
                   maxLength: {
                     value: 55,
@@ -70,8 +70,8 @@ export default function AutosRegistro({
                 {...register("marca", {
                   required: { value: true, message: "Marca es requerido" },
                   minLength: {
-                    value: 4,
-                    message: "Marca debe tener al menos 4 caracteres",
+                    value: 2,
+                    message: "Marca debe tener al menos 2 caracteres",
                   },
                   maxLength: {
                     value: 55,
@@ -104,8 +104,8 @@ export default function AutosRegistro({
                 {...register("modelo", {
                   required: { value: true, message: "Modelo es requerido" },
                   minLength: {
-                    value: 4,
-                    message: "Modelo debe tener al menos 4 caracteres",
+                    value: 2,
+                    message: "Modelo debe tener al menos 2 caracteres",
                   },
                   maxLength: {
                     value: 55,
@@ -129,7 +129,7 @@ export default function AutosRegistro({
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="puertas">
-                Puertas<span className="text-danger">*</span>:
+                Cantidad de Puertas<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
@@ -158,7 +158,7 @@ export default function AutosRegistro({
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="fecha">
-                Fecha<span className="text-danger">*</span>:
+                Fecha de Compra<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
