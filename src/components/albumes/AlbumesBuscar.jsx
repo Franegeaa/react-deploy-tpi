@@ -1,8 +1,8 @@
 import React from "react";
-export default function AlbumesBuscar ({Titulo, setTitulo, Activo, setActivo, Buscar, Agregar}) {
+export default function AlbumesBuscar ({Titulo, setTitulo, Buscar, Agregar}) {
 
     return (
-    <form name="FormBusqueda">
+    <form name="FormBusqueda" onSubmit={(e)=> e.preventDefault()}>
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4 col-md-2">
@@ -14,11 +14,12 @@ export default function AlbumesBuscar ({Titulo, setTitulo, Activo, setActivo, Bu
               className="form-control"
               onChange={(e) => setTitulo(e.target.value)}
               value={Titulo}
-              maxLength="55"
+              maxLength="40"
               autoFocus
             />
           </div>
         </div>
+  
         <hr />
   
         {/* Botones */}

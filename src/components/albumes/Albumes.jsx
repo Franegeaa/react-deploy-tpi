@@ -1,9 +1,11 @@
-import { AlbumesService } from "./../services/albumes.service";
-import React, { useState, useEffect } from "react";
+import React, { useState} from "react";
 import moment from "moment";
 import AlbumesBuscar from "./AlbumesBuscar";
 import AlbumesListado from "./AlbumesListado";
 import AlbumesRegistro from "./AlbumesRegistro";
+import { AlbumesService } from "../../services/Albumes.services";
+
+
 
 function Albumes() {
   const TituloAccionABMC = {
@@ -16,33 +18,17 @@ function Albumes() {
   const [AccionABMC, setAccionABMC] = useState("L");
 
   const [Titulo, setTitulo] = useState("");
-  const [Activo, setActivo] = useState("");
+  
 
   const [Items, setItems] = useState(null);
   const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
-  const [RegistrosTotal, setRegistrosTotal] = useState(0);
-  const [Pagina, setPagina] = useState(1);
-  const [Paginas, setPaginas] = useState([]);
+ 
 
-  async function Buscar(_pagina) {
-    if (_pagina && _pagina !== Pagina) {
-      setPagina(_pagina);
-    }
-    // OJO Pagina (y cualquier estado...) se actualiza para el proximo render, para buscar usamos el parametro _pagina
-    else {
-      _pagina = Pagina;
-    }
-
-    const data = await AlbumesService.Buscar(Titulo, _pagina);
-    setItems(data.Items);
-    setRegistrosTotal(data.RegistrosTotal);
-
-    //generar array de las páginas para mostrar en select del paginador
-    const arrPaginas = [];
-    for (let i = 1; i <= Math.ceil(data.RegistrosTotal / 10); i++) {
-      arrPaginas.push(i);
-    }
-    setPaginas(arrPaginas);
+  async function Buscar() {
+    console.log(Titulo);
+    const data = await AlbumesService.Buscar(Titulo);
+    console.log(data);
+    setItems(data);
   }
 
   async function BuscarPorId(item, accionABMC) {
@@ -65,31 +51,26 @@ function Albumes() {
       Titulo: null,
       Artista: null,
       FechaLanzamiento: moment(new Date()).format("YYYY-MM-DD"),
-    });
+      idgenero: 0,
+       });
+  }
+  
+  async function Eliminar(item) {
+     const resp = window.confirm(
+       "Esta seguro que quiere borrar el album?"
+     );
+     if (resp) {
+         await AlbumesService.Eliminar(item.IdAlbum);
+         Buscar();
+     }
   }
 
-  function Imprimir() {
-    alert("En desarrollo...");
-  }
 
   async function Grabar(item) {
     // agregar o modificar
-    try {
-      await AlbumesService.Grabar(item);
-    } catch (error) {
-      alert(error?.response?.data?.message ?? error.toString());
-      return;
-    }
+    await AlbumesService.Grabar(item);
     await Buscar();
     Volver();
-
-    setTimeout(() => {
-      alert(
-        "Registro " +
-          (AccionABMC === "A" ? "agregado" : "modificado") +
-          " correctamente."
-      );
-    }, 0);
   }
 
   // Volver/Cancelar desde Agregar/Modificar/Consultar
@@ -103,37 +84,43 @@ function Albumes() {
         Albumes <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
-      <AlbumesBuscar
-        Titulo={Titulo}
-        setTitulo={setTitulo}
-        Activo={Activo}
-        setActivo={setActivo}
-        Buscar={Buscar}
-        Agregar={Agregar}
-      />
+      {AccionABMC === "L" && (
+        <AlbumesBuscar
+          Titulo={Titulo}
+          setTitulo={setTitulo}
+          Buscar={Buscar}
+          Agregar={Agregar}
+        />
+      )}
 
       {/* Tabla de resutados de busqueda y Paginador */}
-      <AlbumesListado
-        {...{
-          Items,
-          Consultar,
-          Modificar,
-          Imprimir,
-          Pagina,
-          RegistrosTotal,
-          Paginas,
-          Buscar,
-        }}
-      />
+      {AccionABMC === "L" && Items?.length > 0 && (
+        <AlbumesListado
+          {...{
+            Items,
+            Consultar,
+            Eliminar,
+            Modificar,
+            Buscar,
+          }}
+        />
+      )}
 
-      <div className="alert alert-info mensajesAlert">
-        <i className="fa fa-exclamation-sign"></i>
-        No se encontraron registros...
-      </div>
+      {AccionABMC === "L" && Items?.length === 0 && (
+        <div className="alert alert-info mensajesAlert">
+          <i className="fa fa-exclamation-sign"></i>
+          No se encontraron registros...
+        </div>
+      )}
 
       {/* Formulario de alta/modificacion/consulta */}
-      <AlbumesRegistro {...{ AccionABMC, Item, Grabar, Volver }} />
+      {AccionABMC !== "L" && (
+        <AlbumesRegistro
+          {...{ AccionABMC, Item, Grabar, Volver }}
+        />
+      )}
     </div>
   );
 }
+
 export { Albumes };

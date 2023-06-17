@@ -1,17 +1,28 @@
 import React from "react";
+import { useForm } from "react-hook-form";
 
-
-
-export default function AlbumRegistro({
+export default function AlbumesRegistro({
   AccionABMC,
   Item,
   Grabar,
   Volver,
 }) {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, touchedFields, isValid, isSubmitted },
+  } = useForm({ values: Item });
+
+  const onSubmit = (data) => {
+    Grabar(data);
+  };
+  console.log(Item);
   if (!Item) return null;
+
   return (
-    <form>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="container-fluid">
+
         <fieldset disabled={AccionABMC === "C"}>
 
           {/* campo Titulo */}
@@ -24,11 +35,27 @@ export default function AlbumRegistro({
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                name="Titulo"
-                value={Item?.Titulo}
+                {...register("Titulo", {
+                  required: { value: true, message: "Titulo es requerido" },
+                  minLength: {
+                    value: 4,
+                    message: "Titulo debe tener al menos 4 caracteres",
+                  },
+                  maxLength: {
+                    value: 55,
+                    message: "Titulo debe tener como máximo 55 caracteres",
+                  },
+                })}
                 autoFocus
-                className="form-control "
+                className={
+                  "form-control " + (errors?.Titulo ? "is-invalid" : "")
+                }
               />
+              {errors?.Titulo && touchedFields.Titulo && (
+                <div className="invalid-feedback">
+                  {errors?.Titulo?.message}
+                </div>
+              )}
             </div>
           </div>
 
@@ -36,16 +63,55 @@ export default function AlbumRegistro({
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="Artista">
-              Artista<span className="text-danger">*</span>:
+                Artista<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                name="Artista"
-                value={Item.Artista}
-                className="form-control"
+                {...register("Artista", {
+                  required: { value: true, message: "Artista es requerido" },
+                  minLength: {
+                    value: 4,
+                    message: "Artista debe tener al menos 4 caracteres",
+                  },
+                  maxLength: {
+                    value: 55,
+                    message: "Artista debe tener como máximo 55 caracteres",
+                  },
+                })}
+                autoFocus
+                className={
+                  "form-control " + (errors?.Artista ? "is-invalid" : "")
+                }
               />
+              {errors?.Artista && touchedFields.Artista && (
+                <div className="invalid-feedback">
+                  {errors?.Artista?.message}
+                </div>
+              )}
+            </div>
+          </div>
+          {/* campo FechaLanzamiento */}
+          <div className="row">
+            <div className="col-sm-4 col-md-3 offset-md-1">
+              <label className="col-form-label" htmlFor="FechaAlta">
+                Año<span className="text-danger">*</span>:
+              </label>
+            </div>
+            <div className="col-sm-8 col-md-6">
+              <input
+                type="date"
+                {...register("FechaLanzamiento", {
+                  required: { message: "Anio es requerido" }
+                })}
+                className={
+                  "form-control " + (errors?.FechaLanzamiento ? "is-invalid" : "")
+                }
+              />
+              <div className="invalid-feedback">
+                {errors?.FechaLanzamiento?.message}
+              </div>
             </div>
           </div>
 
@@ -53,33 +119,25 @@ export default function AlbumRegistro({
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
               <label className="col-form-label" htmlFor="idgenero">
-              idgenero<span className="text-danger">*</span>:
+                idgenero<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                name="idgenero"
-                value={Item.idgenero}
-                className="form-control"
+                {...register("idgenero", {
+                  required: {
+                    value: true,
+                    message: "idgenero es requerido",
+                  },
+                })}
+                className={
+                  "form-control" + (errors?.idgenero ? " is-invalid" : "")
+                }
               />
-            </div>
-          </div>
-
-          {/* campo FechaLanzamiento */}
-          <div className="row">
-            <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="FechaLanzamiento">
-                Fecha Alta<span className="text-danger">*</span>:
-              </label>
-            </div>
-            <div className="col-sm-8 col-md-6">
-              <input
-                type="date"
-                name="FechaLanzamiento"
-                className="form-control"
-                    value={Item?.FechaLanzamiento}
-              />
+              <div className="invalid-feedback">
+                {errors?.idgenero?.message}
+              </div>
             </div>
           </div>
         </fieldset>
@@ -105,10 +163,12 @@ export default function AlbumRegistro({
         </div>
 
         {/* texto: Revisar los datos ingresados... */}
-        <div className="row alert alert-danger mensajesAlert">
-          <i className="fa fa-exclamation-sign"></i>
-          Revisar los datos ingresados...
-        </div>
+        {!isValid && isSubmitted && (
+          <div className="row alert alert-danger mensajesAlert">
+            <i className="fa fa-exclamation-sign"></i>
+            Revisar los datos ingresados...
+          </div>
+        )}
 
       </div>
     </form>
