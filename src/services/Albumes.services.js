@@ -13,7 +13,7 @@ async function Buscar(Titulo) {
       return resp.data;
     } catch (error) {
       console.log(error);
-      throw new Error("Ha ocurrido un error al buscar las Titulo.");
+      throw new Error("Ha ocurrido un error al buscar el Titulo.");
     }
 }
   
