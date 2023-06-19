@@ -1,7 +1,6 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
-
-function Menu() {
+import React from 'react';
+import { NavLink } from 'react-router-dom';
+export default function Menu() {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-md">
       <a className="navbar-brand">
@@ -32,13 +31,18 @@ function Menu() {
             </NavLink>
           </li>
           <li className="nav-item">
+            <NavLink className="nav-link" to="/autos">
+              Autos
+            </NavLink>
+          </li>
+          <li className="nav-item">
             <NavLink className="nav-link" to="/jugadores">
               Jugadores
             </NavLink>
           </li>
+
         </ul>
       </div>
     </nav>
   );
 }
-export default Menu;

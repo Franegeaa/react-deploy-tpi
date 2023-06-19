@@ -6,6 +6,7 @@ import { Footer } from "./components/Footer";
 import { Inicio } from "./components/Inicio";
 import { Albumes } from "./components/albumes/Albumes";
 import { Jugadores } from "./components/jugadores/Jugadores"
+import { Autos }from './components/autos/Autos.jsx';
 function App() {
   return (
     <>
@@ -15,6 +16,7 @@ function App() {
             <Routes>
               <Route path="/inicio" element={<Inicio />} />
               <Route path="/albumes" element={<Albumes/>} />
+              <Route path="/autos" element={<Autos />} />
               <Route path="/jugadores" element={<Jugadores/>} />
               <Route path="*" element={<Navigate to="/inicio" replace />} />
             </Routes>
