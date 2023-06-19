@@ -1,12 +1,12 @@
 import React from "react";
 import moment from "moment";
 
-export default function JugadoresListado({
+export default function AutosListado({
   Items,
   Consultar,
-  Eliminar,
   Modificar,
   Buscar,
+  Eliminar,
 }) {
   return (
     <div className="table-responsive">
@@ -21,40 +21,40 @@ export default function JugadoresListado({
           </tr>
         </thead>
         <tbody>
-          {Items &&
-            Items.map((Item) => (
-              <tr key={Item.IdJugador}>
-                <td className="text-start">{Item.Nombre}</td>
-                <td className="text-start">{Item.Apellido}</td>
-                <td className="text-start">
-                  {moment(Item.FechaNacimiento).format("DD/MM/YYYY")}
-                </td>
-                <td className="text-start">{Item.Goles}</td>
-                <td className="text-center text-nowrap">
-                  <button
-                    className="btn btn-sm btn-outline-primary"
-                    title="Consultar"
-                    onClick={() => Consultar(Item)}
-                  >
-                    <i className="fa fa-eye"></i>
-                  </button>
-                  <button
-                    className="btn btn-sm btn-outline-primary"
-                    title="Modificar"
-                    onClick={() => Modificar(Item)}
-                  >
-                    <i className="fa fa-pencil "></i>
-                  </button>
-                  <button
-                    className="btn btn-sm btn-outline-danger"
-                    title="Eliminar"
-                    onClick={() => Eliminar(Item)}
-                  >
-                    <i className="fas fa-trash-alt"></i>
-                  </button>
-                </td>
-              </tr>
-            ))}
+          {Items.map((Item) => (
+            <tr key={Item.IdJugador}>
+              <td>{Item.Nombre}</td>
+              <td className="text-end">{Item.Apellido}</td>
+              <td className="text-end">{Item.modelo}</td>
+              <td>{Item.Goles}</td>
+              <td className="text-end">
+                {moment(Item.FechaNacimiento).format("DD/MM/YYYY")}
+              </td>
+              <td className="text-center text-nowrap">
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  title="Consultar"
+                  onClick={() => Consultar(Item)}
+                >
+                  <i className="fa fa-eye"></i>
+                </button>
+                <button
+                  className="btn btn-sm btn-outline-primary"
+                  title="Modificar"
+                  onClick={() => Modificar(Item)}
+                >
+                  <i className="fa fa-pencil"></i>
+                </button>
+                <button
+                  className={"btn btn-sm btn-outline-danger"}
+                  title={"Eliminar"}
+                  onClick={() => Eliminar(Item)}
+                >
+                  <i className={"fa fa-times"}></i>
+                </button>
+              </td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>

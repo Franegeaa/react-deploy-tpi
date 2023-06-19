@@ -1,7 +1,12 @@
 import React from "react";
-export default function AlbumesBuscar({ Nombre, setNombre, Buscar, Agregar }) {
+export default function JugadoresBuscar({
+  Nombre,
+  setNombre,
+  Buscar,
+  Agregar,
+}) {
   return (
-    <form name="FormBusqueda" onSubmit={(e) => e.preventDefault()}>
+    <form name="FormBusqueda">
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4 col-md-2">
@@ -13,7 +18,7 @@ export default function AlbumesBuscar({ Nombre, setNombre, Buscar, Agregar }) {
               className="form-control"
               onChange={(e) => setNombre(e.target.value)}
               value={Nombre}
-              maxLength="40"
+              maxLength="55"
               autoFocus
             />
           </div>

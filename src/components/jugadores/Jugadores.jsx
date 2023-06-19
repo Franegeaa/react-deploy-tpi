@@ -20,11 +20,14 @@ function Jugadores() {
   const [Items, setItems] = useState(null);
   const [Item, setItem] = useState(null); // usado en BuscarporId (Modificar, Consultar)
 
+  // cargar al "montar" el componente, solo la primera vez (por la dependencia [])
+
   async function Buscar() {
-    console.log(Nombre);
     const data = await JugadoresService.Buscar(Nombre);
     console.log(data);
     setItems(data);
+
+    //generar array de las páginas para mostrar en select del paginador
   }
 
   async function BuscarPorId(item, accionABMC) {
@@ -46,29 +49,38 @@ function Jugadores() {
       IdJugador: 0,
       Nombre: null,
       Apellido: null,
-      Fechanacimiento: moment(new Date()).format("YYYY-MM-DD"),
+      FechaNacimiento: moment(new Date()).format("YYYY-MM-DD"),
       Goles: 0,
     });
   }
 
-  async function Eliminar(item) {
-    const resp = window.confirm("Esta seguro que quiere borrar el Jufgador?");
-    if (resp) {
-      await JugadoresService.Eliminar(item.IdJugador);
-      Buscar();
-    }
-  }
-
   async function Grabar(item) {
     // agregar o modificar
-    await JugadoresService.Grabar(item);
+    try {
+      await JugadoresService.Grabar(item);
+    } catch (error) {
+      alert(error?.response?.data?.message ?? error.toString());
+      return;
+    }
     await Buscar();
     Volver();
+
+    setTimeout(() => {
+      alert(
+        "Registro " +
+          (AccionABMC === "A" ? "agregado" : "modificado") +
+          " correctamente."
+      );
+    }, 0);
   }
 
   // Volver/Cancelar desde Agregar/Modificar/Consultar
   function Volver() {
     setAccionABMC("L");
+  }
+  async function Eliminar(item) {
+    await JugadoresService.Eliminar(item);
+    Buscar();
   }
 
   return (
@@ -87,14 +99,15 @@ function Jugadores() {
       )}
 
       {/* Tabla de resutados de busqueda y Paginador */}
+
       {AccionABMC === "L" && Items?.length > 0 && (
         <JugadoresListado
           {...{
             Items,
             Consultar,
-            Eliminar,
             Modificar,
             Buscar,
+            Eliminar,
           }}
         />
       )}
@@ -107,11 +120,11 @@ function Jugadores() {
       )}
 
       {/* Formulario de alta/modificacion/consulta */}
+
       {AccionABMC !== "L" && (
         <JugadoresRegistro {...{ AccionABMC, Item, Grabar, Volver }} />
       )}
     </div>
   );
 }
-
 export { Jugadores };
