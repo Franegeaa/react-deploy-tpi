@@ -1,12 +1,12 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Menu from "./components/Menu";
+import Menu from "./components/menu";
 import { Footer } from "./components/Footer";
-import { Inicio } from "./components/Inicio";
+import  Inicio  from "./components/Inicio";
 import { Albumes } from "./components/albumes/Albumes";
 import { Jugadores } from "./components/jugadores/Jugadores"
-import { Autos }from './components/autos/Autos.jsx';
+import Autos from './components/autos/Autos.jsx';
 function App() {
   return (
     <>
