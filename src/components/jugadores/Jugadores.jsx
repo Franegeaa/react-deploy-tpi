@@ -3,9 +3,9 @@ import moment from "moment";
 import JugadoresBuscar from "./JugadoresBuscar";
 import JugadoresListado from "./JugadoresListado";
 import JugadoresRegistro from "./JugadoresRegistro";
-import { JugadoresService } from "../../services/Jugadores.services";
+import { JugadoresService } from "../../services/Jugadores.service";
 
-function Albumes() {
+function Jugadores() {
   const TituloAccionABMC = {
     A: "(Agregar)",
     B: "(Eliminar)",
@@ -78,7 +78,7 @@ function Albumes() {
       </div>
 
       {AccionABMC === "L" && (
-        <AlbumesBuscar
+        <JugadoresBuscar
           Nombre={Nombre}
           setNombre={setNombre}
           Buscar={Buscar}

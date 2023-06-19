@@ -1,0 +1,62 @@
+import React from "react";
+import moment from "moment";
+
+export default function JugadoresListado({
+  Items,
+  Consultar,
+  Eliminar,
+  Modificar,
+  Buscar,
+}) {
+  return (
+    <div className="table-responsive">
+      <table className="table table-hover table-sm table-bordered table-striped">
+        <thead>
+          <tr>
+            <th className="text-center">Nombre</th>
+            <th className="text-center">Apellido</th>
+            <th className="text-center">FechaNacimiento</th>
+            <th className="text-center">Goles</th>
+            <th className="text-center text-nowrap">Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {Items &&
+            Items.map((Item) => (
+              <tr key={Item.IdJugador}>
+                <td className="text-start">{Item.Nombre}</td>
+                <td className="text-start">{Item.Apellido}</td>
+                <td className="text-start">
+                  {moment(Item.FechaNacimiento).format("DD/MM/YYYY")}
+                </td>
+                <td className="text-start">{Item.Goles}</td>
+                <td className="text-center text-nowrap">
+                  <button
+                    className="btn btn-sm btn-outline-primary"
+                    title="Consultar"
+                    onClick={() => Consultar(Item)}
+                  >
+                    <i className="fa fa-eye"></i>
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-primary"
+                    title="Modificar"
+                    onClick={() => Modificar(Item)}
+                  >
+                    <i className="fa fa-pencil "></i>
+                  </button>
+                  <button
+                    className="btn btn-sm btn-outline-danger"
+                    title="Eliminar"
+                    onClick={() => Eliminar(Item)}
+                  >
+                    <i className="fas fa-trash-alt"></i>
+                  </button>
+                </td>
+              </tr>
+            ))}
+        </tbody>
+      </table>
+    </div>
+  );
+}

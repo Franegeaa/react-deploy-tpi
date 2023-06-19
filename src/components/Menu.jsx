@@ -26,6 +26,11 @@ function Menu() {
               Inicio
             </NavLink>
           </li>
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/jugadores">
+              Jugadores
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
