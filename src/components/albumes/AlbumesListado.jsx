@@ -2,7 +2,7 @@ import React from "react";
 import moment from "moment";
 
 
-export default function PeliculasListado ({
+export default function AlbumesListado ({
   Items,
   Consultar,
   Eliminar,
