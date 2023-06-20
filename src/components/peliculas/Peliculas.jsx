@@ -1,13 +1,13 @@
 import React, { useState} from "react";
 import moment from "moment";
-import AlbumesBuscar from "./AlbumesBuscar";
-import AlbumesListado from "./AlbumesListado";
-import AlbumesRegistro from "./AlbumesRegistro";
-import { AlbumesService } from "../../services/Albumes.services";
+import PeliculasBuscar from "./PeliculasBuscar";
+import PeliculasListado from "./PeliculasListado";
+import PeliculasRegistro from "./PeliculasRegistro";
+import { PeliculasService } from "../../services/Peliculas.services";
 
 
 
-function Albumes() {
+function Peliculas() {
   const TituloAccionABMC = {
     A: "(Agregar)",
     B: "(Eliminar)",
@@ -26,13 +26,13 @@ function Albumes() {
 
   async function Buscar() {
     console.log(Titulo);
-    const data = await AlbumesService.Buscar(Titulo);
+    const data = await PeliculasService.Buscar(Titulo);
     console.log(data);
     setItems(data);
   }
 
   async function BuscarPorId(item, accionABMC) {
-    const data = await AlbumesService.BuscarPorId(item);
+    const data = await PeliculasService.BuscarPorId(item);
     setItem(data);
     setAccionABMC(accionABMC);
   }
@@ -47,20 +47,20 @@ function Albumes() {
   function Agregar() {
     setAccionABMC("A");
     setItem({
-      IdAlbum: 0,
+      IdPelicula: 0,
       Titulo: null,
-      Artista: null,
+      Productor: null,
       FechaLanzamiento: moment(new Date()).format("YYYY-MM-DD"),
-      idgenero: 0,
+      DuracionMinutos: 0,
        });
   }
   
   async function Eliminar(item) {
      const resp = window.confirm(
-       "Esta seguro que quiere borrar el album?"
+       "Esta seguro que quiere borrar la pelicula?"
      );
      if (resp) {
-         await AlbumesService.Eliminar(item.IdAlbum);
+         await PeliculasService.Eliminar(item.idPelicula);
          Buscar();
      }
   }
@@ -68,7 +68,7 @@ function Albumes() {
 
   async function Grabar(item) {
     // agregar o modificar
-    await AlbumesService.Grabar(item);
+    await PeliculasService.Grabar(item);
     await Buscar();
     Volver();
   }
@@ -81,11 +81,11 @@ function Albumes() {
   return (
     <div>
       <div className="tituloPagina">
-        Albumes <small>{TituloAccionABMC[AccionABMC]}</small>
+        Peliculas <small>{TituloAccionABMC[AccionABMC]}</small>
       </div>
 
       {AccionABMC === "L" && (
-        <AlbumesBuscar
+        <PeliculasBuscar
           Titulo={Titulo}
           setTitulo={setTitulo}
           Buscar={Buscar}
@@ -95,7 +95,7 @@ function Albumes() {
 
       {/* Tabla de resutados de busqueda y Paginador */}
       {AccionABMC === "L" && Items?.length > 0 && (
-        <AlbumesListado
+        <PeliculasListado
           {...{
             Items,
             Consultar,
@@ -115,7 +115,7 @@ function Albumes() {
 
       {/* Formulario de alta/modificacion/consulta */}
       {AccionABMC !== "L" && (
-        <AlbumesRegistro
+        <PeliculasRegistro
           {...{ AccionABMC, Item, Grabar, Volver }}
         />
       )}
@@ -123,4 +123,4 @@ function Albumes() {
   );
 }
 
-export { Albumes };
+export { Peliculas };

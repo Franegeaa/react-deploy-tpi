@@ -1,7 +1,7 @@
 import React from "react";
 import { useForm } from "react-hook-form";
 
-export default function AlbumesRegistro({
+export default function PeliculasRegistro({
   AccionABMC,
   Item,
   Grabar,
@@ -39,11 +39,11 @@ export default function AlbumesRegistro({
                   required: { value: true, message: "Titulo es requerido" },
                   minLength: {
                     value: 4,
-                    message: "Titulo debe tener al menos 4 caracteres",
+                    message: "Titulo debe tener al menos 1 caracter",
                   },
                   maxLength: {
                     value: 55,
-                    message: "Titulo debe tener como máximo 55 caracteres",
+                    message: "Titulo debe tener como máximo 255 caracteres",
                   },
                 })}
                 autoFocus
@@ -59,39 +59,40 @@ export default function AlbumesRegistro({
             </div>
           </div>
 
-          {/* campo Artista */}
+          {/* campo Productor */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="Artista">
-                Artista<span className="text-danger">*</span>:
+              <label className="col-form-label" htmlFor="Productor">
+                Productor<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                {...register("Artista", {
-                  required: { value: true, message: "Artista es requerido" },
+                {...register("Productor", {
+                  required: { value: true, message: "Productor es requerido" },
                   minLength: {
                     value: 4,
-                    message: "Artista debe tener al menos 4 caracteres",
+                    message: "Productor debe tener al menos 1 caracter",
                   },
                   maxLength: {
                     value: 55,
-                    message: "Artista debe tener como máximo 55 caracteres",
+                    message: "Productor debe tener como máximo 255 caracteres",
                   },
                 })}
                 autoFocus
                 className={
-                  "form-control " + (errors?.Artista ? "is-invalid" : "")
+                  "form-control " + (errors?.Productor ? "is-invalid" : "")
                 }
               />
-              {errors?.Artista && touchedFields.Artista && (
+              {errors?.Productor && touchedFields.Productor && (
                 <div className="invalid-feedback">
-                  {errors?.Artista?.message}
+                  {errors?.Productor?.message}
                 </div>
               )}
             </div>
           </div>
+
           {/* campo FechaLanzamiento */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
@@ -115,28 +116,28 @@ export default function AlbumesRegistro({
             </div>
           </div>
 
-          {/* campo idgenero */}
+          {/* campo DuracionMinutos */}
           <div className="row">
             <div className="col-sm-4 col-md-3 offset-md-1">
-              <label className="col-form-label" htmlFor="idgenero">
-                idgenero<span className="text-danger">*</span>:
+              <label className="col-form-label" htmlFor="DuracionMinutos">
+                DuracionMinutos<span className="text-danger">*</span>:
               </label>
             </div>
             <div className="col-sm-8 col-md-6">
               <input
                 type="text"
-                {...register("idgenero", {
+                {...register("DuracionMinutos", {
                   required: {
                     value: true,
-                    message: "idgenero es requerido",
+                    message: "DuracionMinutos es requerido",
                   },
                 })}
                 className={
-                  "form-control" + (errors?.idgenero ? " is-invalid" : "")
+                  "form-control" + (errors?.DuracionMinutos ? " is-invalid" : "")
                 }
               />
               <div className="invalid-feedback">
-                {errors?.idgenero?.message}
+                {errors?.DuracionMinutos?.message}
               </div>
             </div>
           </div>

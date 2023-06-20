@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const urlResource = "http://localhost:4000/api/albumes";
+const urlResource = "http://localhost:4000/api/peliculas";
 
 
 async function Buscar(Titulo) {
@@ -19,27 +19,27 @@ async function Buscar(Titulo) {
   
 async function BuscarPorId(item) {
     try {
-      const resp = await axios.get(urlResource + "/" + item.IdAlbum);
+      const resp = await axios.get(urlResource + "/" + item.idPelicula);
       console.log(resp.data);
       return resp.data;
     } catch (error) {
       console.log(error);
-      throw new Error("Ha ocurrido un error al buscar el Album por ID.");
+      throw new Error("Ha ocurrido un error al buscar la pelicula por ID.");
     }
 }
   
 async function Grabar(item) {
     console.log(item);
     try {
-      if (!item.IdAlbum) {
+      if (!item.idPelicula) {
         const resp = await axios.post(urlResource, item);
         return resp.data;
       } else {
-        await axios.put(urlResource + "/" + item.IdAlbum, item);
+        await axios.put(urlResource + "/" + item.idPelicula, item);
       }
     } catch (error) {
       console.log(error);
-      throw new Error("Ha ocurrido un error al grabar el Album en la base de datos.");
+      throw new Error("Ha ocurrido un error al grabar la Pelicula");
     }
 }
   
@@ -48,11 +48,11 @@ async function Eliminar(id) {
       await axios.delete(urlResource + "/" + id);
     } catch (error) {
       console.log(error);
-      throw new Error("Ha ocurrido un error al eliminar el Album");
+      throw new Error("Ha ocurrido un error al eliminar la Pelicula");
     }
 }
 
-export const AlbumesService = {
+export const PeliculasService = {
   Buscar,
   BuscarPorId,
   Grabar,

@@ -1,8 +1,8 @@
 import React from "react";
-export default function AlbumesBuscar ({Titulo, setTitulo, Buscar, Agregar}) {
+export default function PeliculasBuscar ({Titulo, setTitulo, Buscar, Agregar}) {
 
     return (
-    <form name="FormBusqueda" onSubmit={(e)=> e.preventDefault()}>
+    <form name="FormBusqueda">
       <div className="container-fluid">
         <div className="row">
           <div className="col-sm-4 col-md-2">
@@ -14,7 +14,7 @@ export default function AlbumesBuscar ({Titulo, setTitulo, Buscar, Agregar}) {
               className="form-control"
               onChange={(e) => setTitulo(e.target.value)}
               value={Titulo}
-              maxLength="40"
+              maxLength="55"
               autoFocus
             />
           </div>

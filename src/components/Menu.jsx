@@ -40,7 +40,11 @@ export default function Menu() {
               Jugadores
             </NavLink>
           </li>
-
+          <li className="nav-item">
+            <NavLink className="nav-link" to="/peliculas">
+            Peliculas
+            </NavLink>
+          </li>
         </ul>
       </div>
     </nav>
