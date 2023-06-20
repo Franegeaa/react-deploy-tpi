@@ -1,7 +1,7 @@
 import "./App.css";
 import React from "react";
 import { BrowserRouter, Route, Routes, Navigate } from "react-router-dom";
-import Menu from "./components/menu";
+import Menu from "./components/Menu";
 import { Footer } from "./components/Footer";
 import  Inicio  from "./components/Inicio";
 import { Albumes } from "./components/albumes/Albumes";
