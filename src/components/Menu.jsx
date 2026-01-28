@@ -3,10 +3,10 @@ import { NavLink } from 'react-router-dom';
 export default function Menu() {
   return (
     <nav className="navbar navbar-dark bg-dark navbar-expand-md">
-      <a className="navbar-brand">
+      <span className="navbar-brand" style={{ cursor: 'default' }}>
         <i className="fa fa-industry"></i>
         &nbsp;<i>TPI</i>
-      </a>
+      </span>
       <button
         className="navbar-toggler"
         type="button"
@@ -42,7 +42,7 @@ export default function Menu() {
           </li>
           <li className="nav-item">
             <NavLink className="nav-link" to="/peliculas">
-            Peliculas
+              Peliculas
             </NavLink>
           </li>
         </ul>
